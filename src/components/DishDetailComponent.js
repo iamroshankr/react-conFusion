@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CardComponent from './CardComponent';
+import { Card, CardImg, CardBody, CardText, CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
 
@@ -9,7 +9,13 @@ class DishDetail extends Component {
 
     renderDish(dish) {
         return (
-            <CardComponent image = {dish.image} name = {dish.name} description = {dish.description} />
+            <Card>
+                <CardImg width='100%' src={dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
         );
     }
     

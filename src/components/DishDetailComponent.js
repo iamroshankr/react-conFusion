@@ -23,15 +23,17 @@ class DishDetail extends Component {
 
         if(commentList !== null) {
             return(
-                <div className='list-unstyled'>
-                    {commentList.map(commentItem => {
-                        return (
-                            <div className='li' key={commentItem.id} >
-                                <p>{commentItem.comment}</p>
-                                <p>-- {commentItem.author} {commentItem.date}</p>
-                            </div>
-                        );
-                    })};
+                <div className='container'>
+                    <ul className='list-unstyled'>
+                        {commentList.map(commentItem => {
+                            return (
+                                <li className='li' key={commentItem.id} >
+                                    <p>{commentItem.comment}</p>
+                                    <p>-- {commentItem.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentItem.date)))}</p>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
             );
         } else {
@@ -42,16 +44,19 @@ class DishDetail extends Component {
     render() {
         
         let selectedDish = this.props.dish;
+        console.log(selectedDish);
 
         if(selectedDish !== null) {
             return (
-                <div className='row'>
-                    <div className='col-12 col-md-5 m-1'>
-                        {this.renderDish(selectedDish)}
-                    </div>
-                    <div className='col-12 col-md-5 m-1'>
-                        <h4>Comments</h4>
-                        {this.renderComments(selectedDish.comments)}
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col-12 col-md-5 m-1'>
+                            {this.renderDish(selectedDish)}
+                        </div>
+                        <div className='col-12 col-md-5 m-1'>
+                            <h4>Comments</h4>
+                            {this.renderComments(selectedDish.comments)}
+                        </div>
                     </div>
                 </div>
             );

@@ -3,6 +3,7 @@ import { Card, CardImg, CardBody, CardText, CardTitle, Breadcrumb, BreadcrumbIte
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import Loading from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => (val) && (val.length >= len);
@@ -82,13 +83,19 @@ class CommentForm extends Component {
 
 function RenderDish({dish}) {
     return (
-        <Card>
-            <CardImg width='100%' src={dish.image} alt={dish.name} />
-            <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+            <Card>
+                <CardImg top src={dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 }
     
@@ -98,15 +105,19 @@ function RenderComments({commentList, addComment, dishId}) {
         return(
             <div className='container'>
                 <ul className='list-unstyled'>
-                    {commentList.map(commentItem => {
-                        return (
-                            <li className='li' key={commentItem.id} >
-                                <p>{commentItem.comment}</p>
-                                <p>-- {commentItem.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentItem.date)))}</p>
-                            </li>
-                        );
-                    })}
-                    <CommentForm dishId={dishId} addComment={addComment} />
+                    <Stagger in>
+                        {commentList.map(commentItem => {
+                            return (
+                                <Fade in>
+                                    <li className='li' key={commentItem.id} >
+                                        <p>{commentItem.comment}</p>
+                                        <p>-- {commentItem.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentItem.date)))}</p>
+                                    </li>
+                                </Fade>
+                            );
+                        })}
+                        <CommentForm dishId={dishId} addComment={addComment} />
+                    </Stagger>
                 </ul>
             </div>
         );

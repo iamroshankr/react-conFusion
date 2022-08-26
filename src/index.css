@@ -3,3 +3,15 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.modal-header {
+  background: #512DA8;
+  color: floralwhite; 
+}
+
+.modal-header .close {
+    color: floralwhite; 
+}
+  
+.modal-body {
+  background: #D1C4E9; 
+}

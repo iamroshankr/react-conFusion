@@ -17,7 +17,8 @@ const mapStateToProps = (state) => {
       dishes: state.dishes,
       comments: state.comments,
       promotions: state.promotions,
-      leaders: state.leaders
+      leaders: state.leaders,
+      logo: state.logo
     };
 }
 
@@ -44,7 +45,7 @@ class Main extends Component {
       return (<Home 
         dish={this.props.dishes.filter( (dish) => dish.featured )[0]}
         leader={this.props.leaders.filter( (leader) => leader.featured === true )[0]} 
-        promotion={this.props.promotions.filter( (promotion) => promotion.featured === true )[0]} 
+        promotion={this.props.promotions.filter( (promotion) => promotion.featured === true )[0]}
       />);
     }
 
@@ -60,7 +61,7 @@ class Main extends Component {
 
     return (
       <div>
-        <Header />
+        <Header logo={this.props.logo} />
         <TransitionGroup>
           <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
             <Switch>

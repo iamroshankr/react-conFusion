@@ -79,17 +79,25 @@ class Header extends Component {
                 </Navbar>
                 <div className='container-fluid jumbotron'>
                     <div className='container'>
-                        <div className='row row-header'>
+                        <div className='row row-header align-items-center'>
                             <div className='col-12 col-sm-6'>
                                 <h1>Ristorante Con Fusion</h1>
                                 <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
                             </div>
+                            <div class="col-12 col-sm-3">
+                                <img class="img-fluid" src={this.props.logo.image} alt="logo 404" />
+                            </div>
+                            <div class="col-12 col-sm-3">
+                                <a id="reserve-button" class="btn btn-block btn-sm btn-warning" href="#">Reserve Table</a>
+                            </div> 
                         </div>
                     </div>
                 </div>
                 <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-                    <ModalBody>
+                    <ModalHeader className='modal-header' toggle={this.toggleModal}>
+                        <h4 className='modal-title'>Login</h4>
+                    </ModalHeader>
+                    <ModalBody className='modal-body'>
                         <Form onSubmit={this.handleLogin}>
                             <FormGroup>
                                 <Label htmlFor='username'>Username</Label>
